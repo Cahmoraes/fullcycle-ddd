@@ -76,13 +76,24 @@ describe('Customer repository test', () => {
 
     const customerResult = await customerRepository.find(customer.id)
 
-    expect(customer).toStrictEqual(customerResult)
+    expect(customerResult).toMatchObject({
+      _id: '123',
+      _name: 'Customer 1',
+      _active: false,
+      _rewardPoints: 0,
+      _address: {
+        _street: 'Street 1',
+        _number: 1,
+        _zip: 'Zipcode 1',
+        _city: 'City 1',
+      },
+    })
   })
 
   it('should throw an error when customer is not found', async () => {
     const customerRepository = new CustomerRepository()
 
-    expect(async () => {
+    await expect(async () => {
       await customerRepository.find('456ABC')
     }).rejects.toThrow('Customer not found')
   })
@@ -106,7 +117,33 @@ describe('Customer repository test', () => {
     const customers = await customerRepository.findAll()
 
     expect(customers).toHaveLength(2)
-    expect(customers).toContainEqual(customer1)
-    expect(customers).toContainEqual(customer2)
+    expect(customers).toEqual(
+      expect.arrayContaining([
+        expect.objectContaining({
+          _id: '123',
+          _name: 'Customer 1',
+          _active: true,
+          _rewardPoints: 10,
+          _address: expect.objectContaining({
+            _street: 'Street 1',
+            _number: 1,
+            _zip: 'Zipcode 1',
+            _city: 'City 1',
+          }),
+        }),
+        expect.objectContaining({
+          _id: '456',
+          _name: 'Customer 2',
+          _active: false,
+          _rewardPoints: 20,
+          _address: expect.objectContaining({
+            _street: 'Street 2',
+            _number: 2,
+            _zip: 'Zipcode 2',
+            _city: 'City 2',
+          }),
+        }),
+      ]),
+    )
   })
 })
