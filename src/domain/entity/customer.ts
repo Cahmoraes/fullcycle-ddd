@@ -1,7 +1,7 @@
 import { AddressChangedEvent } from '../event/customer/address-changed.event'
 import { CustomerCreatedEvent } from '../event/customer/customer-created.event'
 import { EnviaConsoleLog1Handler } from '../event/customer/handler/envia-console-log1-handler'
-import { AddressCreatedHandler } from '../event/customer/handler/envia-console-log1-handler copy'
+import { AddressCreatedHandler } from '../event/customer/handler/address-create-handler'
 import { EnviaConsoleLog2Handler } from '../event/customer/handler/envia-console-log2-handler'
 import { EventDispatcher } from '../event/shared/event-dispatcher'
 import type { Address } from './address'

@@ -1,7 +1,7 @@
 import { Address } from '../../entity/address'
 import { Customer } from '../../entity/customer'
 import { EnviaConsoleLog1Handler } from './handler/envia-console-log1-handler'
-import { AddressCreatedHandler } from './handler/envia-console-log1-handler copy'
+import { AddressCreatedHandler } from './handler/address-create-handler'
 import { EnviaConsoleLog2Handler } from './handler/envia-console-log2-handler'
 
 describe('Customer events tests', () => {
